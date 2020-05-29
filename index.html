@@ -7,8 +7,27 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="modal">
+      <div class="modal-content">
+        <!-- <button id="close">&times;</button> -->
+        <div class="header">
+          <h2>You won</h2>
+          <p class="lead">Good one champ</p>
+        </div>
+        <div class="btn-group">
+          <button id="continue">Continue</button>
+          <button id="gameOver">Exit</button>
+        </div>
+        <a
+          href="https://www.instagram.com/rusty_xix/"
+          target="_blank"
+          class="link"
+          >R<sup>&#9734;</sup></a
+        >
+      </div>
+    </div>
     <div class="container">
-      <h3>Score <span id="score">0</span></h3>
+      <h3>Score: <span id="score">0</span></h3>
       <div class="grid-layout"></div>
     </div>
     <script src="game.js"></script>
