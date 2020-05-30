@@ -2,62 +2,62 @@ document.addEventListener('DOMContentLoaded', () => {
    const grid = document.querySelector('.grid-layout');
    const result = document.getElementById('score')
 
-   const cArray = [
-      {
-         name: 'fries',
-         img: 'images/fries.png'
-      },
-      {
-         name: 'cheeseburger',
-         img: 'images/cheeseburger.png'
-      },
-      {
-         name: 'hotdog',
-         img: 'images/hotdog.png'
-      },
-      {
-         name: 'ice-cream',
-         img: 'images/ice-cream.png'
-      },
-      {
-         name: 'milkshake',
-         img: 'images/milkshake.png'
-      },
-      {
-         name: 'pizza',
-         img: 'images/pizza.png'
-      },
-      {
-         name: 'fries',
-         img: 'images/fries.png'
-      },
-      {
-         name: 'cheeseburger',
-         img: 'images/cheeseburger.png'
-      },
-      {
-         name: 'hotdog',
-         img: 'images/hotdog.png'
-      },
-      {
-         name: 'ice-cream',
-         img: 'images/ice-cream.png'
-      },
-      {
-         name: 'milkshake',
-         img: 'images/milkshake.png'
-      },
-      {
-         name: 'pizza',
-         img: 'images/pizza.png'
-      }
-   ]
-   cArray.sort(() => 0.5 - Math.random())
-
    let chosenCard = []
    let cardId = []
    let cardsWon = []
    let score = 0
+
+   const cArray = [
+      {
+         name: 'image-one',
+         img: 'images/image-01.png'
+      },
+      {
+         name: 'image-two',
+         img: 'images/image-02.png'
+      },
+      {
+         name: 'image-three',
+         img: 'images/image-03.png'
+      },
+      {
+         name: 'image-four',
+         img: 'images/image-04.png'
+      },
+      {
+         name: 'image-five',
+         img: 'images/image-05.png'
+      },
+      {
+         name: 'image-six',
+         img: 'images/image-06.png'
+      },
+      {
+         name: 'image-one',
+         img: 'images/image-01.png'
+      },
+      {
+         name: 'image-two',
+         img: 'images/image-02.png'
+      },
+      {
+         name: 'image-three',
+         img: 'images/image-03.png'
+      },
+      {
+         name: 'image-four',
+         img: 'images/image-04.png'
+      },
+      {
+         name: 'image-five',
+         img: 'images/image-05.png'
+      },
+      {
+         name: 'image-six',
+         img: 'images/image-06.png'
+      }
+   ]
+   cArray.sort(() => 0.5 - Math.random()) // randomize cards every refresh
 
    function init() {
       for (let i = 0; i < cArray.length; i++) {
@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
    function checkMatch() {
       const cards = document.querySelectorAll('img')
       const [optOneId, optTwoId] = cardId
+
       if (chosenCard[0] === chosenCard[1] && optOneId !== optTwoId) {
          cards[optOneId].setAttribute('src', 'images/white.png')
          cards[optTwoId].setAttribute('src', 'images/white.png')
@@ -82,16 +83,21 @@ document.addEventListener('DOMContentLoaded', () => {
          cards[optTwoId].setAttribute('src', 'images/blank.png')
          score
       }
+
       cards.forEach(card => {
          card.classList.remove('pick')
       })
+
       chosenCard = []
       cardId = []
       result.textContent = score
+
       if (cardsWon.length === cArray.length / 2) {
+         cArray.sort(() => 0.5 - Math.random())
          reset()
          init()
       }
+
       if (score === cArray.length) {
          popUpOption()
       }
@@ -99,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
    function flipCard() {
       let id = this.getAttribute('data-id')
+
       if (this.getAttribute('src') !== "images/white.png") {
          this.classList.add('pick')
          if (!cardId.includes(id)) {
@@ -107,19 +114,22 @@ document.addEventListener('DOMContentLoaded', () => {
          }
          this.setAttribute('src', cArray[id].img)
       }
+
       if (chosenCard.length === 2) {
-         setTimeout(checkMatch, 300)
+         setTimeout(checkMatch, 400)
       }
    }
-   init()
+
    function popUpOption() {
       const body = document.body
       const modal = document.querySelector('.modal')
-      body.classList.add('modal-active')
       const continueBtn = document.getElementById('continue');
       const exit = document.getElementById('gameOver')
       const wrapper = document.querySelector('.container')
+
+      body.classList.add('modal-active')
       modal.classList.add('active')
+
       continueBtn.addEventListener('click', () => {
          modal.classList.add('out')
          body.classList.remove('modal-active')
@@ -127,16 +137,17 @@ document.addEventListener('DOMContentLoaded', () => {
          init()
          wrapper.insertAdjacentHTML('beforeend',
             `
-      <span style='margin-top: 10px; text-align: center'>Checkout my <a href="">Github Repo</a></br> For more projects</span>
+      <span style='margin-top: 10px; text-align: center'>Checkout my <a href="https://github.com/rustydcoder">Github Repo</a></br> For more projects</span>
       `
          )
       })
+
       exit.addEventListener('click', () => {
          reset()
          modal.classList.add('out')
          body.classList.remove('modal-active')
          wrapper.innerHTML = `
-      <span style="text-align: center">Thanks for playing. Checkout my <a href="">Github Repo</a></br> For More</span>
+      <span style="text-align: center; margin-top: 10px; color: #fff">Thanks for playing. Checkout my <a href="https://github.com/rustydcoder">Github Repo</a></br> For More</span>
       `
       })
    }
@@ -145,4 +156,6 @@ document.addEventListener('DOMContentLoaded', () => {
       grid.innerHTML = ''
       cardsWon = []
    }
+
+   init()
 })

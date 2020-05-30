@@ -11,8 +11,6 @@ body {
   background-image: url(http://theartmad.com/wp-content/uploads/Dark-Grey-Texture-Wallpaper-5.jpg);
   background-size: cover;
   background-position: top center;
-}
-body.modal-active {
   overflow: hidden;
 }
 .grid-layout {
@@ -25,6 +23,8 @@ body.modal-active {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100vh;
+  width: 100vw;
 }
 .container h3 {
   background-color: #051e3e;
@@ -43,12 +43,20 @@ body.modal-active {
   height: 100%;
   width: 100%;
   overflow: auto;
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  -ms-transform: scale(0);
+  -o-transform: scale(0);
   transform: scale(0);
 }
 .modal-content {
   position: absolute;
   top: 50%;
   left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   background-color: #051e3e;
   width: 275px;
@@ -63,29 +71,52 @@ body.modal-active {
   -moz-box-shadow: 0px 0px 0px 28px rgba(0, 0, 0, 0.2);
   box-shadow: 0px 0px 0px 28px rgba(0, 0, 0, 0.2);
 }
-/* #close {
-  display: block;
-  height: 30px;
-  line-height: 30px;
-  width: 30px;
-  outline: none;
-  text-align: center;
-  border: none;
-  position: absolute;
-  top: 10px;
-  font-weight: 800;
-  right: 10px;
-  font-size: 1.5rem;
-  background: transparent;
-  color: #fff;
-  border-radius: 50%;
-  cursor: pointer;
-  transform: rotate(0deg);
-  transition: 0.4s;
-} */
-/* #close:hover {
-  transform: rotate(180deg);
-} */
+
+.modal.active {
+  z-index: 0;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+}
+.modal.active .modal-content {
+  -webkit-animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)
+    forwards;
+  -moz-animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  -ms-animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  -o-animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.modal.active.out .modal-content {
+  -webkit-animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)
+    forwards;
+  -moz-animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)
+    forwards;
+  -ms-animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  -o-animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.modal.active + .container {
+  z-index: 1;
+  -webkit-animation: blowUpContent 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)
+    forwards;
+  -moz-animation: blowUpContent 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  -ms-animation: blowUpContent 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  -o-animation: blowUpContent 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  animation: blowUpContent 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+.modal.active.out + .container {
+  -webkit-animation: blowUpContentTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)
+    forwards;
+  -moz-animation: blowUpContentTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)
+    forwards;
+  -ms-animation: blowUpContentTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)
+    forwards;
+  -o-animation: blowUpContentTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1)
+    forwards;
+  animation: blowUpContentTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
 .header {
   text-align: center;
   color: #fff;
@@ -128,74 +159,456 @@ a.link {
 a.link:hover {
   text-decoration: underline;
 }
-
-.modal.active {
-  z-index: 0;
-  transform: scale(1);
-}
-.modal.active .modal-content {
-  animation: blowUpModal 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-}
-.modal.active.out .modal-content {
-  animation: blowUpModalTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-}
-.modal.active + .container {
-  z-index: 1;
-  animation: blowUpContent 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
-}
-.modal.active.out + .container {
-  animation: blowUpContentTwo 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+img {
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -ms-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-transform: rotateY(0deg);
+  -moz-transform: rotateY(0deg);
+  -ms-transform: rotateY(0deg);
+  -o-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+  width: 100%;
 }
 
-@keyframes blowUpContent {
+.pick {
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+@media screen and (max-height: 550px) {
+  .grid-layout {
+    grid-template-columns: repeat(4, 50px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 5px;
+  }
+  .container h3 {
+    font-size: 0.9rem;
+  }
+  img {
+    height: 100%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .grid-layout {
+    grid-template-columns: repeat(4, 50px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 5px;
+  }
+  .container h3 {
+    font-size: 0.9rem;
+  }
+  img {
+    height: 100%;
+  }
+}
+
+@-webkit-keyframes blowUpContent {
   0% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
     transform: scale(1);
     opacity: 1;
   }
   99.9% {
+    -webkit-transform: scale(2);
+    -moz-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
     transform: scale(2);
     opacity: 0;
   }
   100% {
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
     transform: scale(0);
+  }
+}
+
+@-moz-keyframes blowUpContent {
+  0% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+  99.9% {
+    -webkit-transform: scale(2);
+    -moz-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+    transform: scale(2);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
+  }
+}
+
+@-ms-keyframes blowUpContent {
+  0% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+  99.9% {
+    -webkit-transform: scale(2);
+    -moz-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+    transform: scale(2);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
+  }
+}
+
+@-o-keyframes blowUpContent {
+  0% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+  99.9% {
+    -webkit-transform: scale(2);
+    -moz-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+    transform: scale(2);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
+  }
+}
+
+@keyframes blowUpContent {
+  0% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+  99.9% {
+    -webkit-transform: scale(2);
+    -moz-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+    transform: scale(2);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
+  }
+}
+
+@-webkit-keyframes blowUpContentTwo {
+  0% {
+    -webkit-transform: scale(2);
+    -moz-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+    transform: scale(2);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes blowUpContentTwo {
+  0% {
+    -webkit-transform: scale(2);
+    -moz-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+    transform: scale(2);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@-o-keyframes blowUpContentTwo {
+  0% {
+    -webkit-transform: scale(2);
+    -moz-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+    transform: scale(2);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes blowUpContentTwo {
+  0% {
+    -webkit-transform: scale(2);
+    -moz-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+    transform: scale(2);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
 @keyframes blowUpContentTwo {
   0% {
+    -webkit-transform: scale(2);
+    -moz-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
     transform: scale(2);
     opacity: 0;
   }
   100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+@-webkit-keyframes blowUpModal {
+  0% {
+    -webkit-transform: translate(-50%, -50%) scale(0);
+    -moz-transform: translate(-50%, -50%) scale(0);
+    -ms-transform: translate(-50%, -50%) scale(0);
+    -o-transform: translate(-50%, -50%) scale(0);
+    transform: translate(-50%, -50%) scale(0);
+  }
+  100% {
+    -webkit-transform: translate(-50%, -50%) scale(1);
+    -moz-transform: translate(-50%, -50%) scale(1);
+    -ms-transform: translate(-50%, -50%) scale(1);
+    -o-transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@-moz-keyframes blowUpModal {
+  0% {
+    -webkit-transform: translate(-50%, -50%) scale(0);
+    -moz-transform: translate(-50%, -50%) scale(0);
+    -ms-transform: translate(-50%, -50%) scale(0);
+    -o-transform: translate(-50%, -50%) scale(0);
+    transform: translate(-50%, -50%) scale(0);
+  }
+  100% {
+    -webkit-transform: translate(-50%, -50%) scale(1);
+    -moz-transform: translate(-50%, -50%) scale(1);
+    -ms-transform: translate(-50%, -50%) scale(1);
+    -o-transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@-ms-keyframes blowUpModal {
+  0% {
+    -webkit-transform: translate(-50%, -50%) scale(0);
+    -moz-transform: translate(-50%, -50%) scale(0);
+    -ms-transform: translate(-50%, -50%) scale(0);
+    -o-transform: translate(-50%, -50%) scale(0);
+    transform: translate(-50%, -50%) scale(0);
+  }
+  100% {
+    -webkit-transform: translate(-50%, -50%) scale(1);
+    -moz-transform: translate(-50%, -50%) scale(1);
+    -ms-transform: translate(-50%, -50%) scale(1);
+    -o-transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@-o-keyframes blowUpModal {
+  0% {
+    -webkit-transform: translate(-50%, -50%) scale(0);
+    -moz-transform: translate(-50%, -50%) scale(0);
+    -ms-transform: translate(-50%, -50%) scale(0);
+    -o-transform: translate(-50%, -50%) scale(0);
+    transform: translate(-50%, -50%) scale(0);
+  }
+  100% {
+    -webkit-transform: translate(-50%, -50%) scale(1);
+    -moz-transform: translate(-50%, -50%) scale(1);
+    -ms-transform: translate(-50%, -50%) scale(1);
+    -o-transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1);
   }
 }
 
 @keyframes blowUpModal {
   0% {
+    -webkit-transform: translate(-50%, -50%) scale(0);
+    -moz-transform: translate(-50%, -50%) scale(0);
+    -ms-transform: translate(-50%, -50%) scale(0);
+    -o-transform: translate(-50%, -50%) scale(0);
     transform: translate(-50%, -50%) scale(0);
   }
   100% {
+    -webkit-transform: translate(-50%, -50%) scale(1);
+    -moz-transform: translate(-50%, -50%) scale(1);
+    -ms-transform: translate(-50%, -50%) scale(1);
+    -o-transform: translate(-50%, -50%) scale(1);
     transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@-webkit-keyframes blowUpModalTwo {
+  0% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes blowUpModalTwo {
+  0% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+@-o-keyframes blowUpModalTwo {
+  0% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+@-ms-keyframes blowUpModalTwo {
+  0% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
+    opacity: 0;
   }
 }
 
 @keyframes blowUpModalTwo {
   0% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
     transform: scale(1);
     opacity: 1;
   }
   100% {
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
     transform: scale(0);
     opacity: 0;
   }
-}
-img {
-  transition: all 0.4s;
-  transform: rotateY(0deg);
-}
-
-.pick {
-  transform: rotateY(180deg);
 }
