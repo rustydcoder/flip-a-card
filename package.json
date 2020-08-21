@@ -1,0 +1,38 @@
+{
+  "name": "memory-game",
+  "version": "1.0.0",
+  "description": "Flip a card",
+  "main": "src/game.js",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rustydcoder/flip-a-card.git"
+  },
+  "author": "Rustydcoder",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rustydcoder/flip-a-card/issues"
+  },
+  "homepage": "https://github.com/rustydcoder/flip-a-card#readme",
+  "devDependencies": {
+    "@babel/core": "^7.11.4",
+    "@babel/preset-env": "^7.11.0",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^4.2.1",
+    "html-webpack-plugin": "^4.3.0",
+    "mini-css-extract-plugin": "^0.10.0",
+    "path": "^0.12.7",
+    "url-loader": "^4.1.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.11.2",
+    "core-js": "^3.6.5"
+  }
+}

@@ -1,3 +1,13 @@
+import './style.css';
+import ImageOne from '../images/image-01.png';
+import ImageTwo from '../images/image-02.png';
+import ImageThree from '../images/image-03.png';
+import ImageFour from '../images/image-04.png';
+import ImageFive from '../images/image-05.png';
+import ImageSix from '../images/image-06.png';
+import BlankImg from '../images/blank.png';
+import WhiteImg from '../images/white.png';
+
 document.addEventListener('DOMContentLoaded', () => {
    const grid = document.querySelector('.grid-layout');
    const result = document.getElementById('score')
@@ -10,51 +20,51 @@ document.addEventListener('DOMContentLoaded', () => {
    const cArray = [
       {
          name: 'image-one',
-         img: 'images/image-01.png'
+         img: ImageOne
       },
       {
          name: 'image-two',
-         img: 'images/image-02.png'
+         img: ImageTwo
       },
       {
          name: 'image-three',
-         img: 'images/image-03.png'
+         img: ImageThree
       },
       {
          name: 'image-four',
-         img: 'images/image-04.png'
+         img: ImageFour
       },
       {
          name: 'image-five',
-         img: 'images/image-05.png'
+         img: ImageFive
       },
       {
          name: 'image-six',
-         img: 'images/image-06.png'
+         img: ImageSix
       },
       {
          name: 'image-one',
-         img: 'images/image-01.png'
+         img: ImageOne
       },
       {
          name: 'image-two',
-         img: 'images/image-02.png'
+         img: ImageTwo
       },
       {
          name: 'image-three',
-         img: 'images/image-03.png'
+         img: ImageThree
       },
       {
          name: 'image-four',
-         img: 'images/image-04.png'
+         img: ImageFour
       },
       {
          name: 'image-five',
-         img: 'images/image-05.png'
+         img: ImageFive
       },
       {
          name: 'image-six',
-         img: 'images/image-06.png'
+         img: ImageSix
       }
    ]
    cArray.sort(() => 0.5 - Math.random()) // randomize cards every refresh
@@ -62,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
    function init() {
       for (let i = 0; i < cArray.length; i++) {
          const card = document.createElement('img');
-         card.setAttribute('src', 'images/blank.png');
+         card.setAttribute('src', BlankImg);
          card.setAttribute('data-id', i)
          card.addEventListener('click', flipCard)
          grid.appendChild(card)
@@ -74,13 +84,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const [optOneId, optTwoId] = cardId
 
       if (chosenCard[0] === chosenCard[1] && optOneId !== optTwoId) {
-         cards[optOneId].setAttribute('src', 'images/white.png')
-         cards[optTwoId].setAttribute('src', 'images/white.png')
+         cards[optOneId].setAttribute('src', WhiteImg)
+         cards[optTwoId].setAttribute('src', WhiteImg)
          cardsWon.push(...[...new Set(chosenCard)])
          score++
       } else {
-         cards[optOneId].setAttribute('src', 'images/blank.png')
-         cards[optTwoId].setAttribute('src', 'images/blank.png')
+         cards[optOneId].setAttribute('src', BlankImg)
+         cards[optTwoId].setAttribute('src', BlankImg)
          score
       }
 
@@ -106,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
    function flipCard() {
       let id = this.getAttribute('data-id')
 
-      if (this.getAttribute('src') !== "images/white.png") {
+      if (this.getAttribute('src') !== WhiteImg) {
          this.classList.add('pick')
          if (!cardId.includes(id)) {
             chosenCard.push(cArray[id].name)
